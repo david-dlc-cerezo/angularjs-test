@@ -4,49 +4,56 @@
     var app = angular.module('ShoppingListCheckOff', []);
     app.controller('AlreadyBoughtController', AlreadyBoughtController);
     app.controller('ToBuyController', ToBuyController);
-    app.service('AlreadyBoughtList', AlreadyBoughtList);
-    app.service('ToBuyList', ToBuyList);
+    app.service('ShoppingListCheckOffService', ShoppingListCheckOffService);
 
-    AlreadyBoughtController.$inject = ['ToBuyList', 'AlreadyBoughtList'];
-    function AlreadyBoughtController(ToBuyList, AlreadyBoughtList){
-        this.toBuyList = ToBuyList;
-        this.boughtList = AlreadyBoughtList;
-        console.log('AlreadyBoughtController');
-        console.log(AlreadyBoughtList);
-        console.log(ToBuyList);
-    }
+    AlreadyBoughtController.$inject = ['ShoppingListCheckOffService'];
+    function AlreadyBoughtController(ShoppingListCheckOffService){
+        var service = ShoppingListCheckOffService;
+        console.log(service);
 
-    ToBuyController.$inject = ['ToBuyList', 'AlreadyBoughtList'];
-    function ToBuyController(ToBuyList, AlreadyBoughtList){
-        this.toBuyList = ToBuyList;
-        this.boughtList = AlreadyBoughtList;
+        this.getList = function(){
+            return service.alreadyBoughtList.getList();
+        }
 
-        console.log('ToBuyController');
-        console.log(AlreadyBoughtList);
-        console.log(ToBuyList);
-
-        this.markAsBought = function (index){
-            this.boughtList.addItem( this.toBuyList.getItem(index) );
-            this.toBuyList.removeItem(index);
+        this.isListEmpty = function(){
+            return service.alreadyBoughtList.isListEmpty();
         }
     }
 
-    function AlreadyBoughtList(){
-        return new ShoppingList();
+    ToBuyController.$inject = ['ShoppingListCheckOffService'];
+    function ToBuyController(ShoppingListCheckOffService){
+        var service = ShoppingListCheckOffService;
+        console.log(service);
+
+        this.getList = function(){
+            return service.toBuyList.getList();
+        }
+
+        this.isListEmpty = function(){
+            return service.toBuyList.isListEmpty();
+        }
+
+        this.markAsBought = function (index){
+            service.alreadyBoughtList.addItem( service.toBuyList.getItem(index) );
+            service.toBuyList.removeItem(index);
+        }
     }
 
-    function ToBuyList(){
-        var toBuyList = new ShoppingList();
-        toBuyList.addItem('cookies', 1);
-        toBuyList.addItem('pasta', 2);
-        toBuyList.addItem('eggs', 12);
-        toBuyList.addItem('bananas', 10);
-        toBuyList.addItem('milk', 6);
-        return toBuyList;
+    function ShoppingListCheckOffService(){
+        //To buy list
+        this.toBuyList = new ShoppingList();
+        this.toBuyList.addItem('cookies', 1);
+        this.toBuyList.addItem('pasta', 2);
+        this.toBuyList.addItem('eggs', 12);
+        this.toBuyList.addItem('bananas', 10);
+        this.toBuyList.addItem('milk', 6);
+
+        //Already bought list
+        this.alreadyBoughtList = new ShoppingList();
     }
 
+    //Prototype for a shopping list
     function ShoppingList(){
-
         //List of shopping items
         var itemsList = [];
 
@@ -64,7 +71,7 @@
             itemsList.splice(index, 1);
         }
 
-        this.getItem= function (index) {
+        this.getItem = function (index) {
             return itemsList[index];
         }
 

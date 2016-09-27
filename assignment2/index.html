@@ -18,9 +18,9 @@
     <div class="col-md-6" ng-controller="ToBuyController as toBuy">
         <h2>To Buy:</h2>
         <ul>
-            <li ng-repeat="item in toBuy.toBuyList.getList()">Buy {{item.quantity}} {{item.name}} <button class="btn btn-default" ng-click="toBuy.markAsBought($index)"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
+            <li ng-repeat="item in toBuy.getList()">Buy {{item.quantity}} {{item.name}} <button class="btn btn-default" ng-click="toBuy.markAsBought($index)"><span class="glyphicon glyphicon-ok"></span> Bought</button></li>
         </ul>
-        <div class="emptyMessage" ng-if="toBuy.toBuyList.isListEmpty()">
+        <div class="emptyMessage" ng-if="toBuy.isListEmpty()">
             Everything is bought!
         </div>
     </div>
@@ -29,9 +29,9 @@
     <div class="col-md-6" ng-controller="AlreadyBoughtController as bought">
      <h2>Already Bought:</h2>
      <ul>
-       <li ng-repeat="item in bought.boughtList.getList()">Bought {{item.quantity}} {{item.name}}</li>
+       <li ng-repeat="item in bought.getList()">Bought {{item.quantity}} {{item.name}}</li>
      </ul>
-     <div class="emptyMessage" ng-if="bought.boughtList.isListEmpty()">
+     <div class="emptyMessage" ng-if="bought.isListEmpty()">
          Nothing bought yet.
      </div>
     </div>
