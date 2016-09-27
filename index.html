@@ -2,9 +2,22 @@
 <html>
     <head>
         <meta charset="utf-8">
-        <title>Hello Coursera</title>
+        <title>Assigments for Single Page Web Applications with AngularJS</title>
+        <link rel="stylesheet" href="styles/bootstrap.min.css">
+        <script src="js/angular.min.js"></script>
+        <script src="js/AssigmentList.app.js"></script>
     </head>
-    <body>
-        <h1>Hello Coursera Peers!</h1>
+    <body ng-app="AssigmentListApp">
+        <div class="container" ng-controller="AssigmentListController as assigments">
+            <h1>Single Page Web Applications with AngularJS - Assigments</h1>
+            <h2>David de la Calle Cerezo</h2>
+            <p>Hello Coursera Peers!</p>
+            <p>Here you can find my assigments:</p>
+            <ul>
+                <li ng-repeat="item in assigments.list.getList()">
+                    <a ng-href="{{item.folder}}">{{item.title}}</a>
+                </li>
+            </ul>
+        </div>
     </body>
 </html>
