@@ -25,6 +25,7 @@
 
         this.addItem('Assigment 1', "assignment1/");
         this.addItem('Assigment 2', "assignment2/");
+        this.addItem('Assigment 3', "assignment3/");
 
         this.getList = function () {
             return list;
