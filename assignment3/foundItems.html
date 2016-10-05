@@ -1,0 +1,26 @@
+
+<div class="container">
+    <!-- Results -->
+    <div ng-show="foundItems">
+        <div class="row">
+            <span class="col">
+                <h3>Found items:</h3>
+            </span>
+        </div>
+        <div class="row menuItem" ng-repeat="item in foundItems">
+            <span class="col-sm-9">
+                <span class="name">{{item.name}}</span>
+                <span class="description">{{item.description}}</span>
+            </span>
+            <span class="col-sm-3">
+                <button class="btn btn-danger" ng-click="onRemove({index: $index});">Don't want this one!</button>
+            </span>
+        </div>
+    </div>
+    <!-- Error -->
+    <div ng-show="error" class="row">
+        <div class="col alert alert-danger">
+            {{error}}
+        </div>
+    </div>
+</div>

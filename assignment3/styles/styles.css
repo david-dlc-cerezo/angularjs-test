@@ -50,3 +50,20 @@ input[type="text"] {
     transform: rotate(360deg);
   }
 }
+
+.menuItem{
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px dashed grey;
+}
+.name{
+    display: block;
+    font-weight: bold;
+}
+.description{
+    display: block;
+}
+.menuItem .btn{
+    margin: auto;
+    display: block;
+}
